@@ -6,12 +6,12 @@ import main.Node;
 import main.Queen;
 
 public class SimulatedAnnealing {
-    private final static int N=8;
+    private final static int N = 8;
     int nodesGenerated;
     private Queen[] startState;
     private Node start;
 
-    public SimulatedAnnealing(Queen[] s){
+    public SimulatedAnnealing(Queen[] s) {
         nodesGenerated = 0;
         start = new Node();
         startState = new Queen[N];
@@ -22,18 +22,18 @@ public class SimulatedAnnealing {
         start.computeHeuristic();
     }
 
-    public void startState(){
+    public void startState() {
         start = new Node();
         startState = new Queen[N];
         Random gen = new Random();
-        for(int i=0; i<N; i++){
+        for(int i = 0; i < N; i++){
             startState[i] = new Queen(gen.nextInt(N), i);
         }
         start.setState(startState);
         start.computeHeuristic();
     }
 
-    public Node simulatedAnneal(double initialTemp, double step){
+    public Node simulatedAnneal(double initialTemp, double step) {
         Node currentNode = start;
         double temperature = initialTemp;
         double val = step;
@@ -41,20 +41,21 @@ public class SimulatedAnnealing {
         int delta;
         double determine;
         Node nextNode = new Node();
-        while(currentNode.getHn() !=0 && temperature > 0){
+        while(currentNode.getHn() !=0 && temperature > 0) {
             //select a random neighbour from currentNode
             nextNode = currentNode.getRandomNeighbour(currentNode);
             nodesGenerated++;
-            if(nextNode.getHn() ==0)
+            if(nextNode.getHn() == 0) {
                 return nextNode;
-            delta = currentNode.getHn()  - nextNode.getHn() ;
-            if(delta > 0){ //currentNode has a higher heuristic
+            }
+            delta = currentNode.getHn() - nextNode.getHn();
+            if (delta > 0) { //currentNode has a higher heuristic
                 currentNode = nextNode;
-            }else{
+            } else {
                 probability = Math.exp(delta/temperature);
                 //Do we want to choose nextNode or stick with currentNode?
                 determine = Math.random();
-                if(determine <= probability){ //choose nextNode
+                if (determine <= probability) { //choose nextNode
                     currentNode = nextNode;
                 }
             }
@@ -63,11 +64,11 @@ public class SimulatedAnnealing {
         return currentNode;
     }
 
-    public int getNodesGenerated(){
+    public int getNodesGenerated() {
         return nodesGenerated;
     }
 
-    public Node getStartNode(){
+    public Node getStartNode() {
         return start;
     }
 }

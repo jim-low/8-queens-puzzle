@@ -17,7 +17,7 @@ public class Main {
         runSimulatedAnnealing();
     }
 
-    public static Queen[] generateBoard(){
+    public static Queen[] generateBoard() {
         Queen[] start = new Queen[8];
         Random gen = new Random();
 
@@ -40,8 +40,8 @@ public class Main {
             Node hillSolved = hillClimber.hillClimbing();
 
             // found answer if heuristic == 0
-            if(hillSolved.getHn() == 0){
-                System.out.println("Hill Climbing Solved:\n"+hillSolved);
+            if(hillSolved.getHn() == 0) {
+                System.out.println("Hill Climbing Solved:\n" + hillSolved);
                 hillClimbSuccesses++;
             }
 
@@ -64,15 +64,15 @@ public class Main {
         int annealNodes = 0;
         int annealSuccesses = 0;
 
-        for(int i = 0; i < numberOfRuns; i++){
+        for(int i = 0; i < numberOfRuns; i++) {
             Queen[] startBoard = Main.generateBoard();
 
             SimulatedAnnealing anneal = new SimulatedAnnealing(startBoard);
 
             Node annealSolved = anneal.simulatedAnneal(28, 0.0001);
 
-            if(annealSolved.getHn() == 0){
-                System.out.println("Anneal Solved:\n"+annealSolved);
+            if (annealSolved.getHn() == 0) {
+                System.out.println("Anneal Solved:\n" + annealSolved);
                 annealSuccesses++;
             }
 

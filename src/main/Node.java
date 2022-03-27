@@ -36,7 +36,7 @@ public class Node implements Comparable<Node> {
         return neighbours;
     }
 
-    public Node getRandomNeighbour(Node startState){
+    public Node getRandomNeighbour(Node startState) {
         Random gen = new Random();
         int col = gen.nextInt(N);
         int d = gen.nextInt(N-1)+1;
@@ -46,10 +46,10 @@ public class Node implements Comparable<Node> {
         return neighbour;
     }
 
-    public int computeHeuristic(){
-        for(int i=0; i<N-1; i++){
-            for(int j=i+1; j<N; j++){
-                if(state[i].canAttack(state[j])){
+    public int computeHeuristic() {
+        for(int i=0; i<N-1; i++) {
+            for(int j=i+1; j<N; j++) {
+                if(state[i].canAttack(state[j])) {
                     hn++;
                 }
             }
@@ -58,22 +58,25 @@ public class Node implements Comparable<Node> {
     }
 
     //compares based on heuristic values
-    public int compareTo(Node n){
-        if(this.hn < n.hn)
+    public int compareTo(Node n) {
+        if (this.hn < n.hn) {
             return -1;
-        else if(this.hn > n.hn)
+        }
+
+        if (this.hn > n.hn) {
             return 1;
-        else
-            return 0;
+        }
+
+        return 0;
     }
 
-    public void setState(Queen[] s){
-        for(int i=0; i<N; i++){
+    public void setState(Queen[] s) {
+        for (int i=0; i<N; i++) {
             state[i]= new Queen(s[i].getRow(), s[i].getColumn());
         }
     }
 
-    public Queen[] getState(){
+    public Queen[] getState() {
         return state;
     }
 
@@ -81,24 +84,30 @@ public class Node implements Comparable<Node> {
         return this.hn;
     }
 
-    public String toString(){
-        String result="";
+    public String toString() {
+        String result = "";
         String[][] board = new String[N][N];
+
         // empty spaces
-        for(int i=0; i<N; i++)
-            for(int j=0; j<N; j++)
-                board[i][j]="* ";
-        //place the queens on the board
-        for(int i=0; i<N; i++){
-            board[state[i].getRow()][state[i].getColumn()]="Q ";
+        for(int i = 0; i < N; i++) {
+            for(int j = 0; j < N; j++) {
+                board[i][j] = "* ";
+            }
         }
+
+        //place the queens on the board
+        for (int i = 0; i < N; i++) {
+            board[state[i].getRow()][state[i].getColumn()] = "Q ";
+        }
+
         //print values
-        for(int i=0; i<N; i++){
-            for(int j=0; j<N; j++){
+        for(int i = 0; i < N; i++) {
+            for(int j = 0; j < N; j++) {
                 result+=board[i][j];
             }
-            result+="\n";
+            result += "\n";
         }
+
         return result;
     }
 }

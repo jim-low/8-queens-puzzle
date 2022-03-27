@@ -7,32 +7,32 @@ import main.Node;
 import main.Queen;
 
 public class HillClimbing {
-    private final static int N=8;
+    private final static int N = 8;
     private Queen[] startState;
     private Node start; //start state
     private int nodesGenerated;
 
-    public HillClimbing(){
+    public HillClimbing() {
         start = new Node(); //empty start node
         startState = new Queen[N]; //empty start state
         startState();
-        nodesGenerated=0;
+        nodesGenerated = 0;
     }
 
-    public HillClimbing(Queen[] s){
+    public HillClimbing(Queen[] s) {
         start = new Node();
         startState = new Queen[N];
-        for(int i=0; i<s.length; i++){
+        for (int i = 0; i < s.length; i++) {
             startState[i] = new Queen(s[i].getRow(), s[i].getColumn());
         }
         start.setState(startState);
         start.computeHeuristic();
-        nodesGenerated=0;
+        nodesGenerated = 0;
     }
 
     public void startState(){
         Random gen = new Random();
-        for(int i=0; i<N; i++){
+        for(int i = 0; i < N; i++) {
             startState[i] = new Queen(gen.nextInt(N), i);
         }
         start.setState(startState);
@@ -46,13 +46,13 @@ public class HillClimbing {
             nodesGenerated += successors.size();
             Node nextNode = null;
 
-            for (int i=0; i<successors.size(); i++) {
+            for (int i = 0; i < successors.size(); i++) {
                 if (successors.get(i).compareTo(currentNode) < 0) {
                     nextNode = successors.get(i);
                 }
             }
 
-            if (nextNode==null) {
+            if (nextNode == null) {
                 return currentNode;
             }
 
@@ -60,11 +60,11 @@ public class HillClimbing {
         }
     }
 
-    public Node getStartNode(){
+    public Node getStartNode() {
         return start;
     }
 
-    public int getNodesGenerated(){
+    public int getNodesGenerated() {
         return nodesGenerated;
     }
 }
