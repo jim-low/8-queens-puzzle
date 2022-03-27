@@ -7,7 +7,7 @@ import hillClimbing.HillClimbing;
 import simulatedAnnealing.SimulatedAnnealing;
 
 public class Main {
-    public static int numberOfRuns = 12;
+    public static int numberOfRuns = 10;
 
     public static void main(String[] args) {
         runHillClimbing();
@@ -33,12 +33,7 @@ public class Main {
         int hillClimbSuccesses = 0;
 
         for(int i = 0; i < numberOfRuns; i++){
-            System.out.println("this is " + i + " time running");
             Queen[] startBoard = Main.generateBoard();
-            for (int j = 0; j < startBoard.length; ++j) {
-                System.out.println(startBoard[j]);
-            }
-            System.out.println();
 
             HillClimbing hillClimber = new HillClimbing(startBoard);
 
