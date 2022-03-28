@@ -45,17 +45,17 @@ public class Main {
 
         for(int i = 0; i < initialStates.length; i++){
             HillClimbing hillClimber = new HillClimbing(initialStates[i]);
-            long startGA = System.currentTimeMillis();
+            long startTime = System.currentTimeMillis();
             Node hillSolved = hillClimber.hillClimbing();
-            long endGA = System.currentTimeMillis();
+            long endTime = System.currentTimeMillis();
             Runtime runtime = Runtime.getRuntime();
 
             // found answer if heuristic == 0
             if(hillSolved.getHn() == 0) {
-                long memoryUsedGA = runtime.totalMemory() - runtime.freeMemory();
+                long memoryUsed = runtime.totalMemory() - runtime.freeMemory();
                 System.out.println("Hill Climbing Solved:\n" + hillSolved);
-                System.out.println("Memory Used: " + memoryUsedGA);
-                System.out.println("Elapsed Time in milli seconds: " + (endGA - startGA) + "\n");
+                System.out.println("Memory Used: " + memoryUsed);
+                System.out.println("Elapsed Time in milli seconds: " + (endTime - startTime) + "\n");
                 hillClimbSuccesses++;
             } else {
                 System.out.println("Unable to solve :(");
@@ -80,20 +80,20 @@ public class Main {
     public static void runSimulatedAnnealing() {
         int annealNodes = 0;
         int annealSuccesses = 0;
-        
+
         for(int i = 0; i < initialStates.length; i++) {
             SimulatedAnnealing anneal = new SimulatedAnnealing(initialStates[i]);
 
-            long startSA = System.currentTimeMillis();
+            long startTime = System.currentTimeMillis();
             Node annealSolved = anneal.simulatedAnneal(28, 0.0001);
-            long endSA = System.currentTimeMillis();
+            long endTime = System.currentTimeMillis();
             Runtime runtime = Runtime.getRuntime();
 
             if (annealSolved.getHn() == 0) {
-                long memoryUsedGA = runtime.totalMemory() - runtime.freeMemory();
+                long memoryUsed = runtime.totalMemory() - runtime.freeMemory();
                 System.out.println("Anneal Solved:\n" + annealSolved);
-                System.out.println("Memory Used: " + memoryUsedGA);
-                System.out.println("Elapsed Time in milli seconds: " + (endSA - startSA) + "\n");
+                System.out.println("Memory Used: " + memoryUsed);
+                System.out.println("Elapsed Time in milli seconds: " + (endTime - startTime) + "\n");
                 annealSuccesses++;
             } else {
                 System.out.println("Unable to solve :(");
