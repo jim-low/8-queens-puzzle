@@ -28,9 +28,10 @@ public class HillClimbing {
         start.setState(startState);
         start.computeHeuristic();
         nodesGenerated = 0;
+        System.out.println("Initial State:\n" + start);
     }
 
-    public void startState(){
+    public void startState() {
         Random gen = new Random();
         for(int i = 0; i < N; i++) {
             startState[i] = new Queen(gen.nextInt(N), i);
@@ -39,7 +40,7 @@ public class HillClimbing {
         start.computeHeuristic();
     }
 
-    public Node hillClimbing(){
+    public Node hillClimbing() {
         Node currentNode = start;
         while (true) {
             ArrayList<Node> successors = currentNode.generateNeighbours(currentNode);

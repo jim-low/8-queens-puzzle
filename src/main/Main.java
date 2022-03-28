@@ -8,12 +8,22 @@ import simulatedAnnealing.SimulatedAnnealing;
 
 public class Main {
     public static int numberOfRuns = 10;
+    public static Queen[][] initialStates = {
+        {new Queen(7, 0), new Queen(1, 1), new Queen(0, 2), new Queen(4, 3), new Queen(6, 4), new Queen(1, 5), new Queen(0, 6), new Queen(4, 7)},
+        {new Queen(7, 0), new Queen(0, 1), new Queen(2, 2), new Queen(6, 3), new Queen(1, 4), new Queen(2, 5), new Queen(3, 6), new Queen(7, 7)},
+        {new Queen(3, 0), new Queen(4, 1), new Queen(7, 2), new Queen(0, 3), new Queen(2, 4), new Queen(5, 5), new Queen(7, 6), new Queen(4, 7)},
+        {new Queen(7, 0), new Queen(5, 1), new Queen(2, 2), new Queen(0, 3), new Queen(1, 4), new Queen(1, 5), new Queen(0, 6), new Queen(1, 7)},
+        {new Queen(3, 0), new Queen(3, 1), new Queen(1, 2), new Queen(5, 3), new Queen(7, 4), new Queen(4, 5), new Queen(0, 6), new Queen(0, 7)},
+        {new Queen(4, 0), new Queen(1, 1), new Queen(2, 2), new Queen(7, 3), new Queen(3, 4), new Queen(6, 5), new Queen(2, 6), new Queen(1, 7)},
+        {new Queen(7, 0), new Queen(3, 1), new Queen(7, 2), new Queen(1, 3), new Queen(0, 4), new Queen(1, 5), new Queen(1, 6), new Queen(7, 7)},
+        {new Queen(6, 0), new Queen(1, 1), new Queen(0, 2), new Queen(0, 3), new Queen(3, 4), new Queen(4, 5), new Queen(5, 6), new Queen(3, 7)},
+        {new Queen(6, 0), new Queen(6, 1), new Queen(3, 2), new Queen(2, 3), new Queen(6, 4), new Queen(4, 5), new Queen(7, 6), new Queen(0, 7)},
+        {new Queen(0, 0), new Queen(0, 1), new Queen(2, 2), new Queen(4, 3), new Queen(4, 4), new Queen(5, 5), new Queen(3, 6), new Queen(7, 7)},
+    };
 
     public static void main(String[] args) {
         runHillClimbing();
-
         System.out.println();
-
         runSimulatedAnnealing();
     }
 
@@ -24,6 +34,7 @@ public class Main {
         for(int i = 0; i < 8; i++){
             start[i] = new Queen(gen.nextInt(8), i);
         }
+        // System.out.println(start);
 
         return start;
     }
@@ -32,10 +43,8 @@ public class Main {
         int hillClimbNodes = 0;
         int hillClimbSuccesses = 0;
 
-        for(int i = 0; i < numberOfRuns; i++){
-            Queen[] startBoard = Main.generateBoard();
-
-            HillClimbing hillClimber = new HillClimbing(startBoard);
+        for(int i = 0; i < initialStates.length; i++){
+            HillClimbing hillClimber = new HillClimbing(initialStates[i]);
 
             Node hillSolved = hillClimber.hillClimbing();
 
@@ -43,6 +52,9 @@ public class Main {
             if(hillSolved.getHn() == 0) {
                 System.out.println("Hill Climbing Solved:\n" + hillSolved);
                 hillClimbSuccesses++;
+            } else {
+                System.out.println("Unable to solve :(");
+                System.out.println();
             }
 
             hillClimbNodes += hillClimber.getNodesGenerated();
@@ -64,16 +76,17 @@ public class Main {
         int annealNodes = 0;
         int annealSuccesses = 0;
 
-        for(int i = 0; i < numberOfRuns; i++) {
-            Queen[] startBoard = Main.generateBoard();
-
-            SimulatedAnnealing anneal = new SimulatedAnnealing(startBoard);
+        for(int i = 0; i < initialStates.length; i++) {
+            SimulatedAnnealing anneal = new SimulatedAnnealing(initialStates[i]);
 
             Node annealSolved = anneal.simulatedAnneal(28, 0.0001);
 
             if (annealSolved.getHn() == 0) {
                 System.out.println("Anneal Solved:\n" + annealSolved);
                 annealSuccesses++;
+            } else {
+                System.out.println("Unable to solve :(");
+                System.out.println();
             }
 
             annealNodes += anneal.getNodesGenerated();
