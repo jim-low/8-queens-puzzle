@@ -41,28 +41,34 @@ public class Main {
 
     public static void runHillClimbing() {
         int hillClimbNodes = 0;
+        int TotalHillClimbNodes = 0;
         int hillClimbSuccesses = 0;
 
         for(int i = 0; i < initialStates.length; i++){
             HillClimbing hillClimber = new HillClimbing(initialStates[i]);
-            long startTime = System.currentTimeMillis();
+            double startTime = System.currentTimeMillis();   //to get start time for each execution
             Node hillSolved = hillClimber.hillClimbing();
-            long endTime = System.currentTimeMillis();
+            double endTime = System.currentTimeMillis();     //to get end time for each execution
             Runtime runtime = Runtime.getRuntime();
-
+            long memoryUsed = runtime.totalMemory() - runtime.freeMemory();  //to get memory used for each execution
+            
             // found answer if heuristic == 0
             if(hillSolved.getHn() == 0) {
-                long memoryUsed = runtime.totalMemory() - runtime.freeMemory();
                 System.out.println("Hill Climbing Solved:\n" + hillSolved);
-                System.out.println("Memory Used: " + memoryUsed);
-                System.out.println("Elapsed Time in milli seconds: " + (endTime - startTime) + "\n");
                 hillClimbSuccesses++;
             } else {
                 System.out.println("Unable to solve :(");
                 System.out.println();
             }
+            
+            System.out.println("Memory Used: " + memoryUsed);
+            System.out.println("Start Time: " + startTime);
+            System.out.println("End Time: " + endTime);
+            System.out.printf("Elapsed Time in milli seconds: %.10f\n", (endTime - startTime));
 
-            hillClimbNodes += hillClimber.getNodesGenerated();
+            hillClimbNodes = hillClimber.getNodesGenerated(); //to obtain the number of nodes generated for each execution
+            TotalHillClimbNodes += hillClimber.getNodesGenerated();  //to obtain the total number of nodes generated for each execution
+            System.out.println("Hill Climbing Nodes Generated:" + hillClimbNodes + "\n");
         }
 
         System.out.println("Hill climb successes: " + hillClimbSuccesses);
@@ -73,12 +79,13 @@ public class Main {
 
         NumberFormat fmt = NumberFormat.getPercentInstance();
 
-        System.out.println("Hill climbing:\nNodes: " + hillClimbNodes);
+        System.out.println("Hill climbing:\nNodes: " + TotalHillClimbNodes);
         System.out.println("Percent successes: " + fmt.format(hillClimbPercent));
     }
 
     public static void runSimulatedAnnealing() {
         int annealNodes = 0;
+        int totalAnnealNodes = 0;
         int annealSuccesses = 0;
 
         for(int i = 0; i < initialStates.length; i++) {
@@ -93,14 +100,16 @@ public class Main {
                 long memoryUsed = runtime.totalMemory() - runtime.freeMemory();
                 System.out.println("Anneal Solved:\n" + annealSolved);
                 System.out.println("Memory Used: " + memoryUsed);
-                System.out.println("Elapsed Time in milli seconds: " + (endTime - startTime) + "\n");
+                System.out.println("Elapsed Time in milli seconds: " + (endTime - startTime));
                 annealSuccesses++;
             } else {
                 System.out.println("Unable to solve :(");
                 System.out.println();
             }
 
-            annealNodes += anneal.getNodesGenerated();
+            annealNodes = anneal.getNodesGenerated();
+            totalAnnealNodes = anneal.getNodesGenerated();
+            System.out.println("Simulated Annealing Nodes Generated:" + annealNodes + "\n");
         }
 
         System.out.println("Simulated Annealing successes: " + annealSuccesses);
@@ -109,7 +118,7 @@ public class Main {
         double annealPercent = (double)(annealSuccesses/numberOfRuns);
         NumberFormat fmt = NumberFormat.getPercentInstance();
 
-        System.out.println("Simulated Annealing:\nNodes: " + annealNodes);
+        System.out.println("Total Simulated Annealing Nodes: " + totalAnnealNodes);
         System.out.println("Percent successes: " + fmt.format(annealPercent));
     }
 }
