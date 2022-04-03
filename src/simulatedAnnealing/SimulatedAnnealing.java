@@ -38,6 +38,7 @@ public class SimulatedAnnealing {
         double temperature = initialTemp;
         double val = step;
         double probability;
+        // delta = difference in how worse the neighboring state is to the current state
         int delta;
         double determine;
         Node nextNode = new Node();
