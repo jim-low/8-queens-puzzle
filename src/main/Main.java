@@ -3,8 +3,8 @@ package main;
 import java.text.NumberFormat;
 import java.util.Random;
 
-import hillClimbing.HillClimbing;
-import simulatedAnnealing.SimulatedAnnealing;
+import DiongZiYu.HillClimbing;
+import JimLowLapHong.SimulatedAnnealing;
 
 public class Main {
     public static Queen[][] initialStates = {
@@ -34,7 +34,6 @@ public class Main {
         for(int i = 0; i < 8; i++){
             start[i] = new Queen(gen.nextInt(8), i);
         }
-        // System.out.println(start);
 
         return start;
     }

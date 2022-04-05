@@ -1,4 +1,4 @@
-package simulatedAnnealing;
+package JimLowLapHong;
 
 import java.util.Random;
 

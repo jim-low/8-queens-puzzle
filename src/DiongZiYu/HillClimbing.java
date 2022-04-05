@@ -1,4 +1,4 @@
-package hillClimbing;
+package DiongZiYu;
 
 import java.util.ArrayList;
 import java.util.Random;
