@@ -7,7 +7,6 @@ import hillClimbing.HillClimbing;
 import simulatedAnnealing.SimulatedAnnealing;
 
 public class Main {
-    public static int numberOfRuns = 10;
     public static Queen[][] initialStates = {
         {new Queen(7, 0), new Queen(1, 1), new Queen(0, 2), new Queen(4, 3), new Queen(6, 4), new Queen(1, 5), new Queen(0, 6), new Queen(4, 7)},
         {new Queen(7, 0), new Queen(0, 1), new Queen(2, 2), new Queen(6, 3), new Queen(1, 4), new Queen(2, 5), new Queen(3, 6), new Queen(7, 7)},
@@ -20,6 +19,7 @@ public class Main {
         {new Queen(6, 0), new Queen(6, 1), new Queen(3, 2), new Queen(2, 3), new Queen(6, 4), new Queen(4, 5), new Queen(7, 6), new Queen(0, 7)},
         {new Queen(0, 0), new Queen(0, 1), new Queen(2, 2), new Queen(4, 3), new Queen(4, 4), new Queen(5, 5), new Queen(3, 6), new Queen(7, 7)},
     };
+    public static int numberOfRuns = initialStates.length;
 
     public static void main(String[] args) {
         runHillClimbing();
@@ -51,7 +51,7 @@ public class Main {
             double endTime = System.currentTimeMillis();     //to get end time for each execution
             Runtime runtime = Runtime.getRuntime();
             long memoryUsed = runtime.totalMemory() - runtime.freeMemory();  //to get memory used for each execution
-            
+
             // found answer if heuristic == 0
             if(hillSolved.getHn() == 0) {
                 System.out.println("Hill Climbing Solved:\n" + hillSolved);
@@ -60,7 +60,7 @@ public class Main {
                 System.out.println("Unable to solve :(");
                 System.out.println();
             }
-            
+
             System.out.println("Memory Used: " + memoryUsed);
             System.out.println("Start Time: " + startTime);
             System.out.println("End Time: " + endTime);
