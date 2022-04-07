@@ -90,9 +90,9 @@ public class Main {
         for(int i = 0; i < initialStates.length; i++) {
             SimulatedAnnealing anneal = new SimulatedAnnealing(initialStates[i]);
 
-            long startTime = System.currentTimeMillis();
+            double startTime = System.currentTimeMillis();
             Node annealSolved = anneal.simulatedAnneal(28, 0.0001);
-            long endTime = System.currentTimeMillis();
+            double endTime = System.currentTimeMillis();
             Runtime runtime = Runtime.getRuntime();
 
             if (annealSolved.getHn() == 0) {

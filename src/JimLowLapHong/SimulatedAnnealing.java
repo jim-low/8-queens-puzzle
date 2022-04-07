@@ -20,6 +20,7 @@ public class SimulatedAnnealing {
         }
         start.setState(startState);
         start.computeHeuristic();
+        System.out.println("Initial State:\n" + start);
     }
 
     public void startState() {
