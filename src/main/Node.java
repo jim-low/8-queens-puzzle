@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Node implements Comparable<Node> {
-    private static final int N=8; //8 queens
+    private static final int N = 8; //8 queens
     public Queen[] state; //the node's state
     private ArrayList<Node> neighbours;
     private int hn; //heuristic score
@@ -39,7 +39,7 @@ public class Node implements Comparable<Node> {
     public Node getRandomNeighbour(Node startState) {
         Random gen = new Random();
         int col = gen.nextInt(N);
-        int d = gen.nextInt(N-1)+1;
+        int d = gen.nextInt(N - 1) + 1;
         Node neighbour = new Node(startState);
         neighbour.state[col].moveDown(d);
         neighbour.computeHeuristic();
@@ -71,7 +71,7 @@ public class Node implements Comparable<Node> {
     }
 
     public void setState(Queen[] s) {
-        for (int i=0; i<N; i++) {
+        for (int i = 0; i < N; i++) {
             state[i]= new Queen(s[i].getRow(), s[i].getColumn());
         }
     }
@@ -103,7 +103,7 @@ public class Node implements Comparable<Node> {
         //print values
         for(int i = 0; i < N; i++) {
             for(int j = 0; j < N; j++) {
-                result+=board[i][j];
+                result += board[i][j];
             }
             result += "\n";
         }

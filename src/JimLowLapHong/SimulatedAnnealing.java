@@ -15,7 +15,7 @@ public class SimulatedAnnealing {
         nodesGenerated = 0;
         start = new Node();
         startState = new Queen[N];
-        for(int i=0; i<N; i++){
+        for(int i = 0; i < N; i++){
             startState[i] = new Queen(s[i].getRow(), s[i].getColumn());
         }
         start.setState(startState);
@@ -43,7 +43,7 @@ public class SimulatedAnnealing {
         int delta;
         double determine;
         Node nextNode = new Node();
-        while(currentNode.getHn() !=0 && temperature > 0) {
+        while(currentNode.getHn() != 0 && temperature > 0) {
             //select a random neighbour from currentNode
             nextNode = currentNode.getRandomNeighbour(currentNode);
             nodesGenerated++;

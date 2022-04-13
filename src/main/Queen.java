@@ -10,16 +10,16 @@ public class Queen {
     }
 
     public boolean canAttack(Queen q) {
-        boolean canAttack=false;
+        boolean canAttack = false;
 
         //test rows and columns
         if(row == q.getRow() || column == q.getColumn()) {
-            canAttack=true;
+            canAttack = true;
         }
 
         //test diagonal
         else if(Math.abs(column - q.getColumn()) == Math.abs(row - q.getRow())) {
-            canAttack=true;
+            canAttack = true;
         }
 
         return canAttack;
@@ -28,11 +28,11 @@ public class Queen {
     public void moveDown(int spaces) {
         row += spaces;
 
-        if (row > 7 && row % 7 !=0){
+        if (row > 7 && row % 7 != 0){
             row = (row % 7) - 1;
         }
         else if (row > 7 && row % 7 == 0){
-            row=7;
+            row = 7;
         }
     }
 
